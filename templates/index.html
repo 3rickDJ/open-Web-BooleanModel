@@ -40,6 +40,11 @@
                         <a href="{{ url_for('static', filename=file) }}" target="_blank" class="list-group-item list-group-item-success">{{ file }}</a>
                     {% endfor %}
                 </div>
+            {% else %}
+                <div class="alert alert-warning" role="alert">
+                  A simple warning alert—check it out!
+                </div>
+
             {% endif %}
         {% endif %}
     </div>
