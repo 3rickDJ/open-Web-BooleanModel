@@ -24,7 +24,7 @@ def remove_stop_words(terms):
 #Verificamos si una palabra es una stopword
 def is_stop_word(word):
     #Si i la palabra esta en la lista stop_words o su longitud es menor igual a 3 entonces se considera una stopword
-    return word in stop_words or len(word) <= 3
+    return word in stop_words or len(word) <= 2
 
 #Funcion para aplicar stems a los clean_terms
 def stem(cleaned_terms):
