@@ -42,7 +42,9 @@ def inverse_polish(query):
     # Añadimos el ultimo operando al finalizar si la expresion no esta encerrada por parentesis
     if queue:
         polish.append(queue.pop())
-    return [polish.lower() for polish in polish]
+    polish = [polish.lower() for polish in polish]
+    write("Polish", str(polish))
+    return polish
 
 #Aplicamos el proceso de stemming a la lista en notacion polaca inversa
 def stem_polish_query(polish):
@@ -53,10 +55,17 @@ def stem_polish_query(polish):
         if term not in ["!", "u", "n"]:
             #Aplicamos el stemming a ese elemento
             polish[i] = stemmer.stem(term)
+    write("Stemmed", str(polish))
     return polish
 #convertimos la consulta infija en notacion polaca inversa
 def postfix(query):
+    write("Query", query)
     return stem_polish_query(inverse_polish(query))
+
+def write(name, content):
+    with open("query.txt", "a") as f:
+        f.write(content)
+        f.write("\n")
 
 def clean_query(raw_query):
     # Removemos acentos
