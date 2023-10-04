@@ -5,6 +5,7 @@ from . import postfix_notation
 def query(dictionary_stems, raw_query, path_files):
     #convertimos la consulta infija en notacion polaca inversa y la guardamos en postfix
     postfix = postfix_notation.postfix(raw_query)
+    print(postfix)
     #retornamos  la consulta evaluada en notacion polaca inversa
     return evaluate_query(postfix, dictionary_stems, path_files)
 

@@ -9,10 +9,10 @@ nltk.download('snowball_data', quiet=True) # Snowball stemmer data
 def inverse_polish(query):
     #En query guardamos el resultado de aplicarle la funcion a query (por el usuario)
     query = clean_query(query)
-    #Operadores para las consultas "!" = negacion , "u" = union, "n"= interseccion, los "()" son utilizados para los operadores es decir !(Hola) 
+    #Operadores para las consultas "!" = negacion , "u" = union, "n"= interseccion, los "()" son utilizados para los operadores es decir !(Hola)
     operators = ["!", "u", "n", "(", ")"]
     #Capturamos los operadores y palabras (caracteres alfanumericos)
-    pattern = r'([()!un])|(\b\w+\b)'
+    pattern = r'((\b\w+\b)|[()!un])'
     #Encontramos todas las coincidencias del pattern en la cadena query, devolviendo tuplas con operadores o palabras
     matches = re.findall(pattern, query)
     #Seleccionamos el primer elemento si está presente (un operador) o el segundo elemento si el primer elemento está ausente (una palabra).
@@ -26,11 +26,11 @@ def inverse_polish(query):
         # si es ) sacar de queue y meter en polish hasta encontrar (
         if i == ")":
             op = queue.pop()
-            #Mientras que op sea diferente de ( 
+            #Mientras que op sea diferente de (
             while op != "(":
                 #Añadimos a la lista polish los elementos
                 polish.append(op)
-                #Eliminamos (y retornamos) el ultimo elemento de la lista 
+                #Eliminamos (y retornamos) el ultimo elemento de la lista
                 op = queue.pop()
         # si es operador meter en queue
         elif i in operators:
@@ -42,7 +42,7 @@ def inverse_polish(query):
     # Añadimos el ultimo operando al finalizar si la expresion no esta encerrada por parentesis
     if queue:
         polish.append(queue.pop())
-    return polish
+    return [polish.lower() for polish in polish]
 
 #Aplicamos el proceso de stemming a la lista en notacion polaca inversa
 def stem_polish_query(polish):
@@ -66,5 +66,5 @@ def clean_query(raw_query):
     pattern = r'[^a-zA-Z()!un]'
     no_punctuation_string = re.sub(pattern, ' ', decomposed_string)
     # Eliminamos los espacios en blanco al inicio y final con strip y convertimos los caracteres a minusculas
-    return no_punctuation_string.strip().lower()
+    return no_punctuation_string.strip()
 
