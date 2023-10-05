@@ -1,0 +1,12 @@
+facturar
+['facturar']
+['factur']
+!(DIOS)
+['dios', '!']
+['dios', '!']
+(ALICIA n WINDOWS)
+['alicia', 'windows', 'n']
+['alici', 'windows', 'n']
+(ARISTOTELES n SOCRATES)
+['aristoteles', 'socrates', 'n']
+['aristotel', 'socrat', 'n']
